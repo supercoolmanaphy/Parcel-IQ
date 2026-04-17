@@ -21,7 +21,8 @@ body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--t
 
 /* HEADER */
 header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
-.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--gold)}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--gold);display:flex;align-items:center;gap:6px}
+.logo-icon{width:16px;height:16px;object-fit:contain;display:block}
 .logo span{color:var(--muted);font-weight:400}
 .header-actions{display:flex;gap:10px;align-items:center}
 .btn{font-family:'Instrument Sans',sans-serif;font-size:13px;padding:8px 16px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);transition:all .15s}
@@ -126,7 +127,7 @@ textarea.field-input{resize:vertical;min-height:80px}
 <body>
 
 <header>
-  <div class="logo">Parcel<span>IQ</span> Scout</div>
+  <div class="logo"><img class="logo-icon" src="images/eye1.png" alt="" aria-hidden="true"/>Parcel<span>IQ</span> Scout</div>
   <div class="header-actions">
     <span class="count-badge" id="total-count">0</span>
     <button class="btn export-btn" onclick="exportCSV()">⬇ Export CSV</button>
