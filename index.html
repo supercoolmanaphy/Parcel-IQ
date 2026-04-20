@@ -295,6 +295,14 @@ textarea.field-input{resize:vertical;min-height:80px}
         </div>
       </div>
 
+      <div class="field-group">
+        <div class="field-label">Listing Type</div>
+        <select class="field-input" id="f-type" onchange="setModalType(this.value)">
+          <option value="residential">Residential</option>
+          <option value="commercial">Commercial</option>
+        </select>
+      </div>
+
       <!-- DYNAMIC FLAGS -->
       <div class="field-group">
         <div class="field-label">Property Flags <span id="modal-mode-label" style="color:var(--gold);text-transform:none;letter-spacing:0"></span></div>
@@ -343,6 +351,7 @@ let editingId = null;
 let activeFilter = 'all';
 let searchQuery = '';
 let propertyMode = localStorage.getItem('parceliq_mode') || 'residential';
+let modalPropertyType = propertyMode;
 let currentPhotoData = null;
 let capturedLat = null;
 let capturedLng = null;
@@ -454,10 +463,16 @@ function renderFilters(){
   ).join('');
 }
 
+function setModalType(mode){
+  modalPropertyType = mode === 'commercial' ? 'commercial' : 'residential';
+  renderModalCheckboxes({});
+  updateScorePreview();
+}
+
 // ── MODAL CHECKBOXES ────────────────────────────────────────────────────
 function renderModalCheckboxes(existingFlags){
-  const defs = propertyMode==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
-  document.getElementById('modal-mode-label').textContent = '— ' + (propertyMode==='commercial' ? 'Commercial' : 'Residential');
+  const defs = modalPropertyType==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
+  document.getElementById('modal-mode-label').textContent = '— ' + (modalPropertyType==='commercial' ? 'Commercial' : 'Residential');
   document.getElementById('modal-checkbox-grid').innerHTML = defs.map(f=>
     `<div class="checkbox-item">
       <input type="checkbox" id="${f.id}" onchange="updateScorePreview()" ${(existingFlags||{})[f.key]?'checked':''}/>
@@ -467,7 +482,7 @@ function renderModalCheckboxes(existingFlags){
 }
 
 function getCurrentFlags(){
-  const defs = propertyMode==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
+  const defs = modalPropertyType==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
   const result = {};
   defs.forEach(f=>{const el=document.getElementById(f.id);if(el) result[f.key]=el.checked;});
   return result;
@@ -706,7 +721,8 @@ function openAddModal(editProp=null){
   document.getElementById('cond-val').textContent = editProp ? editProp.condition : 3;
 
   // If editing a commercial property switch mode checkboxes to its type
-  const propMode = editProp ? (editProp.type||'residential') : propertyMode;
+  modalPropertyType = editProp ? (editProp.type||'residential') : propertyMode;
+  document.getElementById('f-type').value = modalPropertyType;
   renderModalCheckboxes(editProp ? editProp.flags : {});
 
   // Photo
@@ -742,7 +758,7 @@ function handleOverlayClick(e){if(e.target===e.currentTarget)closeModal();}
 function updateScorePreview(){
   const flags = getCurrentFlags();
   const condition = parseInt(document.getElementById('f-condition').value)||3;
-  const score = scoreProperty({flags, condition, type:propertyMode});
+  const score = scoreProperty({flags, condition, type:modalPropertyType});
   const circle = document.getElementById('preview-circle');
   const desc   = document.getElementById('preview-desc');
   circle.textContent = score;
@@ -762,7 +778,7 @@ function saveProperty(){
   const prop = {
     id: editingId || ('p_' + Date.now()),
     address,
-    type: propertyMode,
+    type: modalPropertyType,
     value: document.getElementById('f-value').value || null,
     owner: document.getElementById('f-owner').value.trim() || null,
     notes: document.getElementById('f-notes').value.trim() || null,
