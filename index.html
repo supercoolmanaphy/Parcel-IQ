@@ -15,50 +15,62 @@
   --tag-pre:#3A0A0A;--tag-pre-text:#F05050;
   --tag-vacant:#0A1F14;--tag-vacant-text:#50C080;
   --tag-neglect:#1A1A0A;--tag-neglect-text:#C0B050;
+  --tag-comm:#0A1A3A;--tag-comm-text:#50A0F0;
 }
-body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;grid-template-rows:auto 1fr;grid-template-columns:360px 1fr}
+body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;grid-template-rows:auto auto 1fr;grid-template-columns:360px 1fr}
 
 /* HEADER */
-header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
-.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--gold)}
+header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100;gap:10px;flex-wrap:wrap}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--gold);white-space:nowrap}
 .logo span{color:var(--muted);font-weight:400}
-.header-actions{display:flex;gap:10px;align-items:center}
-.btn{font-family:'Instrument Sans',sans-serif;font-size:13px;padding:8px 16px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);transition:all .15s}
+.header-center{display:flex;align-items:center;gap:10px;flex:1;justify-content:center}
+.header-actions{display:flex;gap:8px;align-items:center}
+.btn{font-family:'Instrument Sans',sans-serif;font-size:13px;padding:9px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);transition:all .15s;min-height:40px;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
 .btn:hover{background:var(--surface2);border-color:var(--gold)}
 .btn-gold{background:var(--gold);color:#0F0F0E;border-color:var(--gold);font-weight:600}
 .btn-gold:hover{background:var(--gold2);border-color:var(--gold2)}
+.btn-sm{font-size:12px;padding:6px 12px;min-height:32px}
 .count-badge{background:var(--gold);color:#0F0F0E;font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;font-family:'Syne',sans-serif}
 
+/* MODE TOGGLE */
+.mode-toggle{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
+.mode-btn{padding:7px 14px;font-size:13px;font-family:'Instrument Sans',sans-serif;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .15s;white-space:nowrap;min-height:36px}
+.mode-btn.active{background:var(--gold);color:#0F0F0E;font-weight:600}
+
 /* SIDEBAR */
-aside{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+aside{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;grid-row:3}
 .sidebar-top{padding:16px;border-bottom:1px solid var(--border)}
 .search-row{display:flex;gap:8px;margin-bottom:12px}
-.search-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:13px;outline:none}
+.search-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:14px;outline:none}
 .search-input:focus{border-color:var(--gold)}
 .filters{display:flex;gap:6px;flex-wrap:wrap}
-.filter-pill{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Instrument Sans',sans-serif}
+.filter-pill{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Instrument Sans',sans-serif}
 .filter-pill.active{background:var(--gold);color:#0F0F0E;border-color:var(--gold);font-weight:600}
 .leads-list{flex:1;overflow-y:auto}
-.lead-item{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;position:relative}
+.lead-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;position:relative}
 .lead-item:hover{background:var(--surface2)}
 .lead-item.selected{background:var(--surface2);border-left:3px solid var(--gold)}
-.lead-addr{font-size:14px;font-weight:500;margin-bottom:4px;color:var(--text)}
-.lead-meta{font-size:12px;color:var(--muted);margin-bottom:7px}
+.lead-row{display:flex;gap:10px;align-items:flex-start}
+.lead-thumb{width:46px;height:46px;border-radius:7px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+.lead-content{flex:1;min-width:0;padding-right:36px}
+.lead-addr{font-size:14px;font-weight:500;margin-bottom:3px;color:var(--text)}
+.lead-meta{font-size:12px;color:var(--muted);margin-bottom:6px}
 .lead-tags{display:flex;gap:5px;flex-wrap:wrap}
 .tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
 .tag-tax{background:var(--tag-tax);color:var(--tag-tax-text)}
 .tag-pre{background:var(--tag-pre);color:var(--tag-pre-text)}
 .tag-vacant{background:var(--tag-vacant);color:var(--tag-vacant-text)}
 .tag-neglect{background:var(--tag-neglect);color:var(--tag-neglect-text)}
-.score-dot{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Syne',sans-serif}
+.tag-comm{background:var(--tag-comm);color:var(--tag-comm-text)}
+.score-dot{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Syne',sans-serif}
 .score-high{background:#1A3A20;color:#50D080}
 .score-med{background:#3A3010;color:#D0A030}
 .score-low{background:#2A1A0A;color:#C07030}
 
 /* MAP PANEL */
-main{position:relative;background:#1A1A18}
+main{position:relative;background:#1A1A18;grid-row:3}
 #map{width:100%;height:100%}
-.map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted)}
+.map-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);padding:20px}
 .map-placeholder h3{font-family:'Syne',sans-serif;color:var(--text);font-size:18px}
 .map-placeholder p{font-size:13px;max-width:280px;text-align:center;line-height:1.6}
 .api-setup{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:20px;max-width:340px;text-align:left;margin-top:8px}
@@ -70,29 +82,31 @@ main{position:relative;background:#1A1A18}
 .api-key-input:focus{border-color:var(--gold)}
 
 /* DETAIL PANEL */
-.detail-panel{position:absolute;top:16px;right:16px;width:300px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden;display:none;z-index:10;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.detail-panel{position:absolute;top:16px;right:16px;width:310px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden;display:none;z-index:10;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .detail-panel.open{display:block}
-.detail-header{padding:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start}
+.detail-header{padding:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .detail-addr{font-size:14px;font-weight:600;font-family:'Syne',sans-serif;line-height:1.3;margin-bottom:4px}
-.close-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:0}
+.close-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:0;flex-shrink:0}
 .detail-body{padding:16px}
+.detail-photo{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px;display:block}
 .detail-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)}
 .detail-row:last-child{border-bottom:none}
 .detail-label{color:var(--muted)}
 .detail-val{font-weight:500;text-align:right;max-width:180px}
 .detail-notes{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6;background:var(--surface2);padding:10px;border-radius:6px}
+.detail-maps-row{padding:0 16px 12px;display:flex;gap:8px}
 .detail-actions{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
 
 /* ADD MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:480px;overflow:hidden}
-.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:500px;overflow:hidden;max-height:95vh;display:flex;flex-direction:column}
+.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
 .modal-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
-.modal-body{padding:24px;display:flex;flex-direction:column;gap:14px;max-height:70vh;overflow-y:auto}
+.modal-body{padding:24px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;flex:1}
 .field-group{display:flex;flex-direction:column;gap:5px}
 .field-label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
-.field-input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px;color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+.field-input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px;color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s;width:100%}
 .field-input:focus{border-color:var(--gold)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -100,45 +114,86 @@ main{position:relative;background:#1A1A18}
 .checkbox-item:hover{border-color:var(--gold)}
 .checkbox-item input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer}
 .checkbox-item label{font-size:13px;cursor:pointer;color:var(--text)}
-.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0}
 .score-preview{background:var(--surface2);border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
 .score-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;flex-shrink:0}
 .score-desc{font-size:12px;color:var(--muted);line-height:1.5}
 
+/* PHOTO UPLOAD */
+.photo-upload-area{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .15s;background:var(--surface2);position:relative}
+.photo-upload-area:hover{border-color:var(--gold)}
+.photo-upload-area.has-photo{padding:0;overflow:hidden;border-style:solid;border-color:var(--gold)}
+.photo-upload-icon{font-size:32px;margin-bottom:8px}
+.photo-upload-text{font-size:13px;color:var(--muted)}
+.photo-upload-sub{font-size:11px;color:var(--dim);margin-top:4px}
+#f-photo-preview{width:100%;max-height:220px;object-fit:cover;display:none;border-radius:8px}
+.photo-change-btn{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.75);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:'Instrument Sans',sans-serif;display:none}
+
+/* GPS */
+.gps-btn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 14px;color:var(--text);font-size:15px;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .15s;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gps-btn:hover{border-color:var(--gold)}
+.gps-btn.captured{border-color:var(--sage);background:rgba(61,122,90,.15)}
+
 /* STATS BAR */
-.stats-bar{grid-column:1/-1;display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface)}
-.stat{flex:1;padding:10px 20px;border-right:1px solid var(--border);text-align:center}
+.stats-bar{grid-column:1/-1;display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto}
+.stat{flex:1;padding:10px 14px;border-right:1px solid var(--border);text-align:center;min-width:90px}
 .stat:last-child{border-right:none}
-.stat-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--gold)}
-.stat-l{font-size:11px;color:var(--muted);margin-top:1px}
+.stat-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--gold)}
+.stat-l{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap}
 
-/* EXPORT */
-.export-btn{display:flex;align-items:center;gap:6px}
+/* AI/FUTURE BADGES */
+.future-badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.ai-badge{display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:10px;color:var(--dim);font-family:'Instrument Sans',sans-serif}
 
-/* Empty state */
+/* EMPTY STATE */
 .empty-state{padding:32px 16px;text-align:center;color:var(--muted)}
 .empty-state p{font-size:13px;line-height:1.6}
-
 textarea.field-input{resize:vertical;min-height:80px}
+
+/* MOBILE */
+@media(max-width:768px){
+  body{grid-template-columns:1fr;grid-template-rows:auto auto auto 1fr}
+  header{padding:10px 14px;gap:8px;flex-wrap:wrap}
+  .logo{font-size:17px}
+  .header-center{width:100%;order:3}
+  .mode-toggle{width:100%}
+  .mode-btn{flex:1;text-align:center}
+  .header-actions{gap:6px}
+  .stats-bar{grid-row:2}
+  main{grid-row:3;min-height:220px}
+  aside{grid-row:4;border-right:none;border-top:1px solid var(--border);max-height:38vh;overflow-y:auto}
+  .btn{min-height:44px;font-size:14px}
+  .btn-gold{padding:10px 18px}
+  .detail-panel{position:fixed;bottom:0;left:0;right:0;top:auto;width:100%;border-radius:14px 14px 0 0;max-height:80vh;overflow-y:auto;border-bottom:none}
+  .field-row{grid-template-columns:1fr}
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal{border-radius:20px 20px 0 0;max-height:92vh;width:100%}
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Parcel<span>IQ</span> Scout</div>
+  <div class="header-center">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="mode-res" onclick="setMode('residential',this)">🏠 Residential</button>
+      <button class="mode-btn" id="mode-com" onclick="setMode('commercial',this)">🏢 Commercial</button>
+    </div>
+  </div>
   <div class="header-actions">
     <span class="count-badge" id="total-count">0</span>
-    <button class="btn export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+    <button class="btn" onclick="exportCSV()">⬇ Export</button>
     <button class="btn btn-gold" onclick="openAddModal()">+ Add Property</button>
   </div>
 </header>
 
 <div class="stats-bar">
-  <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">Total scouted</div></div>
-  <div class="stat"><div class="stat-n" id="s-tax">0</div><div class="stat-l">Tax delinquent</div></div>
-  <div class="stat"><div class="stat-n" id="s-pre">0</div><div class="stat-l">Pre-foreclosure</div></div>
-  <div class="stat"><div class="stat-n" id="s-vacant">0</div><div class="stat-l">Vacant / Neglected</div></div>
-  <div class="stat"><div class="stat-n" id="s-high">0</div><div class="stat-l">High priority</div></div>
+  <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">Total Scouted</div></div>
+  <div class="stat"><div class="stat-n" id="s-stat1">0</div><div class="stat-l" id="s-stat1-l">Tax Delinquent</div></div>
+  <div class="stat"><div class="stat-n" id="s-stat2">0</div><div class="stat-l" id="s-stat2-l">Pre-Foreclosure</div></div>
+  <div class="stat"><div class="stat-n" id="s-stat3">0</div><div class="stat-l" id="s-stat3-l">Vacant / Neglected</div></div>
+  <div class="stat"><div class="stat-n" id="s-high">0</div><div class="stat-l">High Priority</div></div>
 </div>
 
 <aside>
@@ -146,17 +201,10 @@ textarea.field-input{resize:vertical;min-height:80px}
     <div class="search-row">
       <input class="search-input" placeholder="Search address or notes..." id="search-input" oninput="filterLeads()"/>
     </div>
-    <div class="filters">
-      <div class="filter-pill active" data-filter="all" onclick="setFilter('all',this)">All</div>
-      <div class="filter-pill" data-filter="tax_delinquent" onclick="setFilter('tax_delinquent',this)">Tax Delinquent</div>
-      <div class="filter-pill" data-filter="pre_foreclosure" onclick="setFilter('pre_foreclosure',this)">Pre-Foreclosure</div>
-      <div class="filter-pill" data-filter="vacant" onclick="setFilter('vacant',this)">Vacant</div>
-      <div class="filter-pill" data-filter="neglected" onclick="setFilter('neglected',this)">Neglected</div>
-      <div class="filter-pill" data-filter="high" onclick="setFilter('high',this)">High Priority</div>
-    </div>
+    <div class="filters" id="filter-pills"></div>
   </div>
   <div class="leads-list" id="leads-list">
-    <div class="empty-state"><p>No properties yet.<br/>Click <strong style="color:var(--gold)">+ Add Property</strong> to scout your first lead.</p></div>
+    <div class="empty-state"><p>No properties yet.<br/>Tap <strong style="color:var(--gold)">+ Add Property</strong> to scout your first lead.</p></div>
   </div>
 </aside>
 
@@ -176,7 +224,7 @@ textarea.field-input{resize:vertical;min-height:80px}
         </ol>
         <div class="api-key-row">
           <input class="api-key-input" id="api-key-input" placeholder="AIzaSy..." />
-          <button class="btn btn-gold" onclick="loadMap()">Load Map</button>
+          <button class="btn btn-gold btn-sm" onclick="loadMap()">Load Map</button>
         </div>
         <p style="font-size:11px;color:var(--dim);margin-top:8px">Free tier includes $200/mo credit — plenty for personal use.</p>
       </div>
@@ -185,21 +233,22 @@ textarea.field-input{resize:vertical;min-height:80px}
   </div>
   <div class="detail-panel" id="detail-panel">
     <div class="detail-header">
-      <div>
+      <div style="flex:1;min-width:0">
         <div class="detail-addr" id="dp-addr"></div>
-        <div id="dp-tags" style="display:flex;gap:5px;margin-top:5px"></div>
+        <div id="dp-tags" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px"></div>
       </div>
       <button class="close-btn" onclick="closeDetail()">✕</button>
     </div>
     <div class="detail-body" id="dp-body"></div>
+    <div class="detail-maps-row" id="dp-maps-row"></div>
     <div class="detail-actions">
-      <button class="btn" style="flex:1" onclick="editSelected()">Edit</button>
-      <button class="btn" style="flex:1;border-color:var(--rust);color:var(--rust)" onclick="deleteSelected()">Delete</button>
+      <button class="btn btn-sm" style="flex:1" onclick="editSelected()">✏ Edit</button>
+      <button class="btn btn-sm" style="flex:1;border-color:var(--rust);color:var(--rust)" onclick="deleteSelected()">🗑 Delete</button>
     </div>
   </div>
 </main>
 
-<!-- ADD MODAL -->
+<!-- ADD / EDIT MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
   <div class="modal">
     <div class="modal-header">
@@ -207,31 +256,49 @@ textarea.field-input{resize:vertical;min-height:80px}
       <button class="close-btn" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
+
+      <!-- PHOTO UPLOAD -->
+      <div class="field-group">
+        <div class="field-label">📷 Upload Property Photo</div>
+        <div class="photo-upload-area" id="photo-upload-area" onclick="document.getElementById('f-photo-input').click()">
+          <div id="photo-upload-placeholder">
+            <div class="photo-upload-icon">📷</div>
+            <div class="photo-upload-text">Tap to take or upload a photo</div>
+            <div class="photo-upload-sub">Opens camera on mobile · accepts any image</div>
+          </div>
+          <img id="f-photo-preview" alt="Property photo preview"/>
+          <button class="photo-change-btn" id="photo-change-btn" onclick="event.stopPropagation();document.getElementById('f-photo-input').click()">Change Photo</button>
+        </div>
+        <input type="file" id="f-photo-input" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoUpload(this)"/>
+      </div>
+
+      <!-- ADDRESS + GPS -->
       <div class="field-group">
         <div class="field-label">Street Address *</div>
-        <input class="field-input" id="f-address" placeholder="e.g. 1847 Willow Glen Dr, San Jose, CA" oninput="updateScorePreview()"/>
+        <div style="display:flex;gap:8px">
+          <input class="field-input" id="f-address" placeholder="e.g. 1847 Willow Glen Dr, San Jose, CA" oninput="updateScorePreview()" style="flex:1"/>
+          <button class="gps-btn" id="gps-btn" onclick="captureGPS()" title="Auto-capture GPS location">��</button>
+        </div>
+        <div id="gps-status" style="font-size:11px;color:var(--dim);margin-top:3px;display:none"></div>
       </div>
+
       <div class="field-row">
         <div class="field-group">
           <div class="field-label">Est. Value ($)</div>
-          <input class="field-input" id="f-value" type="number" placeholder="1,200,000" oninput="updateScorePreview()"/>
+          <input class="field-input" id="f-value" type="number" placeholder="450,000" oninput="updateScorePreview()"/>
         </div>
         <div class="field-group">
           <div class="field-label">Owner Name</div>
           <input class="field-input" id="f-owner" placeholder="If visible on mailbox"/>
         </div>
       </div>
+
+      <!-- DYNAMIC FLAGS -->
       <div class="field-group">
-        <div class="field-label">Property Flags (check all that apply)</div>
-        <div class="checkbox-grid">
-          <div class="checkbox-item"><input type="checkbox" id="f-tax" onchange="updateScorePreview()"/><label for="f-tax">Tax Delinquent</label></div>
-          <div class="checkbox-item"><input type="checkbox" id="f-pre" onchange="updateScorePreview()"/><label for="f-pre">Pre-Foreclosure</label></div>
-          <div class="checkbox-item"><input type="checkbox" id="f-vacant" onchange="updateScorePreview()"/><label for="f-vacant">Vacant</label></div>
-          <div class="checkbox-item"><input type="checkbox" id="f-neglected" onchange="updateScorePreview()"/><label for="f-neglected">Neglected</label></div>
-          <div class="checkbox-item"><input type="checkbox" id="f-absentee" onchange="updateScorePreview()"/><label for="f-absentee">Absentee Owner</label></div>
-          <div class="checkbox-item"><input type="checkbox" id="f-code" onchange="updateScorePreview()"/><label for="f-code">Code Violations</label></div>
-        </div>
+        <div class="field-label">Property Flags <span id="modal-mode-label" style="color:var(--gold);text-transform:none;letter-spacing:0"></span></div>
+        <div class="checkbox-grid" id="modal-checkbox-grid"></div>
       </div>
+
       <div class="field-group">
         <div class="field-label">Condition (1 = perfect, 5 = severe neglect)</div>
         <input class="field-input" id="f-condition" type="range" min="1" max="5" value="3" oninput="document.getElementById('cond-val').textContent=this.value;updateScorePreview()" style="padding:6px 0"/>
@@ -239,14 +306,24 @@ textarea.field-input{resize:vertical;min-height:80px}
           <span>Good</span><span id="cond-val">3</span><span>Severe</span>
         </div>
       </div>
+
       <div class="field-group">
         <div class="field-label">Scout Notes</div>
-        <textarea class="field-input" id="f-notes" placeholder="What did you observe? Overgrown yard, broken windows, mail piling up, code violation notice on door..."></textarea>
+        <textarea class="field-input" id="f-notes" placeholder="What did you observe? Overgrown yard, broken windows, mail piling up, code notice on door..."></textarea>
       </div>
+
       <div class="score-preview" id="score-preview">
         <div class="score-circle" id="preview-circle">—</div>
         <div class="score-desc" id="preview-desc">Fill in the form to see the motivation score</div>
       </div>
+
+      <!-- FUTURE-READY PLACEHOLDERS -->
+      <div class="future-badges">
+        <span class="ai-badge">🤖 AI distress scoring — coming soon</span>
+        <span class="ai-badge">🔍 OCR address detection — coming soon</span>
+        <span class="ai-badge">📡 GPS auto-locate — tap 📍 above</span>
+      </div>
+
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal()">Cancel</button>
@@ -263,56 +340,244 @@ let selectedId = null;
 let editingId = null;
 let activeFilter = 'all';
 let searchQuery = '';
+let propertyMode = localStorage.getItem('parceliq_mode') || 'residential';
+let currentPhotoData = null;
+let capturedLat = null;
+let capturedLng = null;
+
+// ── FILTER / FLAG DEFINITIONS ───────────────────────────────────────────
+const RESIDENTIAL_FILTERS = [
+  {key:'all',label:'All'},
+  {key:'vacant',label:'Vacant'},
+  {key:'neglected',label:'Neglected'},
+  {key:'absentee',label:'Absentee Owner'},
+  {key:'long_term_owner',label:'Long-Term Owner'},
+  {key:'tax_delinquent',label:'Tax Delinquent'},
+  {key:'high',label:'⭐ High Priority'},
+];
+const COMMERCIAL_FILTERS = [
+  {key:'all',label:'All'},
+  {key:'vacant_retail',label:'Vacant Retail'},
+  {key:'dead_restaurant',label:'Dead Restaurant'},
+  {key:'underutilized_lot',label:'Underutilized Lot'},
+  {key:'redevelopment',label:'Redevelopment'},
+  {key:'absentee',label:'Absentee Owner'},
+  {key:'high',label:'⭐ High Priority'},
+];
+const RESIDENTIAL_FLAGS = [
+  {id:'f-tax',key:'tax_delinquent',label:'Tax Delinquent'},
+  {id:'f-pre',key:'pre_foreclosure',label:'Pre-Foreclosure'},
+  {id:'f-vacant',key:'vacant',label:'Vacant'},
+  {id:'f-neglected',key:'neglected',label:'Neglected'},
+  {id:'f-absentee',key:'absentee',label:'Absentee Owner'},
+  {id:'f-code',key:'code_violations',label:'Code Violations'},
+  {id:'f-longterm',key:'long_term_owner',label:'Long-Term Owner'},
+];
+const COMMERCIAL_FLAGS = [
+  {id:'f-vac-ret',key:'vacant_retail',label:'Vacant Retail'},
+  {id:'f-dead-rest',key:'dead_restaurant',label:'Dead Restaurant'},
+  {id:'f-underutil',key:'underutilized_lot',label:'Underutilized Lot'},
+  {id:'f-redev',key:'redevelopment',label:'Redevelopment Potential'},
+  {id:'f-absentee',key:'absentee',label:'Absentee Owner'},
+  {id:'f-code',key:'code_violations',label:'Code Violations'},
+];
 
 function save(){localStorage.setItem('parceliq_props',JSON.stringify(properties));}
 
+// ── SCORING ─────────────────────────────────────────────────────────────
 function scoreProperty(p){
   let s = 0;
-  if(p.flags.tax_delinquent) s+=30;
-  if(p.flags.pre_foreclosure) s+=35;
-  if(p.flags.vacant) s+=15;
-  if(p.flags.neglected) s+=10;
-  if(p.flags.absentee) s+=10;
-  if(p.flags.code_violations) s+=15;
-  s += (p.condition-1)*8;
-  return Math.min(s,100);
+  const f = p.flags || {};
+  if((p.type||'residential') === 'commercial'){
+    if(f.vacant_retail)    s += 25;
+    if(f.dead_restaurant)  s += 20;
+    if(f.underutilized_lot)s += 15;
+    if(f.redevelopment)    s += 20;
+    if(f.absentee)         s += 10;
+    if(f.code_violations)  s += 10;
+  } else {
+    if(f.tax_delinquent)   s += 30;
+    if(f.pre_foreclosure)  s += 35;
+    if(f.vacant)           s += 15;
+    if(f.neglected)        s += 10;
+    if(f.absentee)         s += 10;
+    if(f.code_violations)  s += 15;
+    if(f.long_term_owner)  s +=  5;
+  }
+  s += ((p.condition||3) - 1) * 8;
+  return Math.min(s, 100);
 }
-
-function scoreClass(s){return s>=70?'score-high':s>=40?'score-med':'score-low';}
 function scoreDotClass(s){return s>=70?'score-high':s>=40?'score-med':'score-low';}
 
-function tagLabel(key){
-  return{tax_delinquent:'Tax Delinquent',pre_foreclosure:'Pre-Foreclosure',vacant:'Vacant',neglected:'Neglected',absentee:'Absentee Owner',code_violations:'Code Violation'}[key]||key;
-}
-function tagClass(key){
-  return{tax_delinquent:'tag-tax',pre_foreclosure:'tag-pre',vacant:'tag-vacant',neglected:'tag-neglect',absentee:'tag-vacant',code_violations:'tag-pre'}[key]||'tag-neglect';
+// ── TAG HELPERS ─────────────────────────────────────────────────────────
+const TAG_LABELS = {
+  tax_delinquent:'Tax Delinquent', pre_foreclosure:'Pre-Foreclosure',
+  vacant:'Vacant', neglected:'Neglected', absentee:'Absentee Owner',
+  code_violations:'Code Violation', long_term_owner:'Long-Term Owner',
+  vacant_retail:'Vacant Retail', dead_restaurant:'Dead Restaurant',
+  underutilized_lot:'Underutilized Lot', redevelopment:'Redevelopment',
+};
+const TAG_CLASSES = {
+  tax_delinquent:'tag-tax', pre_foreclosure:'tag-pre',
+  vacant:'tag-vacant', neglected:'tag-neglect', absentee:'tag-vacant',
+  code_violations:'tag-pre', long_term_owner:'tag-neglect',
+  vacant_retail:'tag-comm', dead_restaurant:'tag-pre',
+  underutilized_lot:'tag-comm', redevelopment:'tag-comm',
+};
+function tagLabel(k){return TAG_LABELS[k]||k;}
+function tagClass(k){return TAG_CLASSES[k]||'tag-neglect';}
+
+// ── MODE ─────────────────────────────────────────────────────────────────
+function setMode(mode, el){
+  propertyMode = mode;
+  localStorage.setItem('parceliq_mode', mode);
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = 'all';
+  renderFilters();
+  updateStats();
+  renderList();
 }
 
+function renderFilters(){
+  const filters = propertyMode==='commercial' ? COMMERCIAL_FILTERS : RESIDENTIAL_FILTERS;
+  document.getElementById('filter-pills').innerHTML = filters.map(f=>
+    `<div class="filter-pill${activeFilter===f.key?' active':''}" data-filter="${f.key}" onclick="setFilter('${f.key}',this)">${f.label}</div>`
+  ).join('');
+}
+
+// ── MODAL CHECKBOXES ────────────────────────────────────────────────────
+function renderModalCheckboxes(existingFlags){
+  const defs = propertyMode==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
+  document.getElementById('modal-mode-label').textContent = '— ' + (propertyMode==='commercial' ? 'Commercial' : 'Residential');
+  document.getElementById('modal-checkbox-grid').innerHTML = defs.map(f=>
+    `<div class="checkbox-item">
+      <input type="checkbox" id="${f.id}" onchange="updateScorePreview()" ${(existingFlags||{})[f.key]?'checked':''}/>
+      <label for="${f.id}">${f.label}</label>
+    </div>`
+  ).join('');
+}
+
+function getCurrentFlags(){
+  const defs = propertyMode==='commercial' ? COMMERCIAL_FLAGS : RESIDENTIAL_FLAGS;
+  const result = {};
+  defs.forEach(f=>{const el=document.getElementById(f.id);if(el) result[f.key]=el.checked;});
+  return result;
+}
+
+// ── PHOTO HANDLING ──────────────────────────────────────────────────────
+function handlePhotoUpload(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+      const MAX = 900;
+      let w = img.width, h = img.height;
+      if(w > MAX || h > MAX){
+        if(w > h){ h = Math.round(h * MAX / w); w = MAX; }
+        else      { w = Math.round(w * MAX / h); h = MAX; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      currentPhotoData = canvas.toDataURL('image/jpeg', 0.72);
+      showPhotoPreview(currentPhotoData);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showPhotoPreview(dataUrl){
+  document.getElementById('f-photo-preview').src = dataUrl;
+  document.getElementById('f-photo-preview').style.display = 'block';
+  document.getElementById('photo-upload-placeholder').style.display = 'none';
+  document.getElementById('photo-upload-area').classList.add('has-photo');
+  document.getElementById('photo-change-btn').style.display = 'block';
+}
+
+function clearPhotoPreview(){
+  document.getElementById('f-photo-preview').src = '';
+  document.getElementById('f-photo-preview').style.display = 'none';
+  document.getElementById('photo-upload-placeholder').style.display = 'block';
+  document.getElementById('photo-upload-area').classList.remove('has-photo');
+  document.getElementById('photo-change-btn').style.display = 'none';
+  document.getElementById('f-photo-input').value = '';
+  currentPhotoData = null;
+}
+
+// ── GPS ──────────────────────────────────────────────────────────────────
+function captureGPS(){
+  const btn = document.getElementById('gps-btn');
+  const status = document.getElementById('gps-status');
+  if(!navigator.geolocation){
+    status.textContent = '⚠ Geolocation not supported on this device.';
+    status.style.color = 'var(--rust)';
+    status.style.display = 'block';
+    return;
+  }
+  btn.textContent = '⏳';
+  status.textContent = 'Getting location…';
+  status.style.color = 'var(--dim)';
+  status.style.display = 'block';
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      capturedLat = pos.coords.latitude.toFixed(6);
+      capturedLng = pos.coords.longitude.toFixed(6);
+      btn.textContent = '✅';
+      btn.classList.add('captured');
+      status.textContent = `📍 ${capturedLat}, ${capturedLng}`;
+      status.style.color = '#50D080';
+      // TODO: Future — reverse-geocode to auto-fill address field
+    },
+    function(err){
+      btn.textContent = '��';
+      btn.classList.remove('captured');
+      status.textContent = '⚠ Could not get location: ' + err.message;
+      status.style.color = 'var(--rust)';
+    },
+    {enableHighAccuracy:true, timeout:12000}
+  );
+}
+
+// ── RENDER LIST ──────────────────────────────────────────────────────────
 function renderList(){
   const list = document.getElementById('leads-list');
   let filtered = properties.filter(p=>{
+    if((p.type||'residential') !== propertyMode) return false;
     if(activeFilter==='high') return scoreProperty(p)>=70;
-    if(activeFilter!=='all') return p.flags[activeFilter];
+    if(activeFilter!=='all')  return p.flags[activeFilter];
     return true;
   }).filter(p=>{
     if(!searchQuery) return true;
-    const q=searchQuery.toLowerCase();
-    return p.address.toLowerCase().includes(q)||(p.notes||'').toLowerCase().includes(q)||(p.owner||'').toLowerCase().includes(q);
+    const q = searchQuery.toLowerCase();
+    return p.address.toLowerCase().includes(q)
+        || (p.notes||'').toLowerCase().includes(q)
+        || (p.owner||'').toLowerCase().includes(q);
   });
 
   if(!filtered.length){
     list.innerHTML='<div class="empty-state"><p>No properties match your filters.</p></div>';
+    updateStats();
     return;
   }
 
   list.innerHTML = filtered.map(p=>{
-    const score=scoreProperty(p);
-    const flagKeys=Object.keys(p.flags).filter(k=>p.flags[k]);
-    const tags=flagKeys.slice(0,3).map(k=>`<span class="tag ${tagClass(k)}">${tagLabel(k)}</span>`).join('');
+    const score = scoreProperty(p);
+    const flagKeys = Object.keys(p.flags||{}).filter(k=>p.flags[k]);
+    const tags = flagKeys.slice(0,2).map(k=>`<span class="tag ${tagClass(k)}">${tagLabel(k)}</span>`).join('');
+    const thumb = p.photo ? `<img class="lead-thumb" src="${p.photo}" alt="Property"/>` : '';
     return `<div class="lead-item${selectedId===p.id?' selected':''}" onclick="selectProperty('${p.id}')">
-      <div class="lead-addr">${p.address}</div>
-      <div class="lead-meta">${p.owner?p.owner+' · ':''} Added ${new Date(p.addedAt).toLocaleDateString()}</div>
-      <div class="lead-tags">${tags}</div>
+      <div class="lead-row">
+        ${thumb ? `<div style="flex-shrink:0">${thumb}</div>` : ''}
+        <div class="lead-content">
+          <div class="lead-addr">${p.address}</div>
+          <div class="lead-meta">${p.owner?p.owner+' &middot; ':''} ${new Date(p.addedAt).toLocaleDateString()}</div>
+          <div class="lead-tags">${tags}</div>
+        </div>
+      </div>
       <div class="score-dot ${scoreDotClass(score)}">${score}</div>
     </div>`;
   }).join('');
@@ -321,45 +586,83 @@ function renderList(){
 }
 
 function updateStats(){
-  document.getElementById('total-count').textContent=properties.length;
-  document.getElementById('s-total').textContent=properties.length;
-  document.getElementById('s-tax').textContent=properties.filter(p=>p.flags.tax_delinquent).length;
-  document.getElementById('s-pre').textContent=properties.filter(p=>p.flags.pre_foreclosure).length;
-  document.getElementById('s-vacant').textContent=properties.filter(p=>p.flags.vacant||p.flags.neglected).length;
-  document.getElementById('s-high').textContent=properties.filter(p=>scoreProperty(p)>=70).length;
+  const mp = properties.filter(p=>(p.type||'residential')===propertyMode);
+  document.getElementById('total-count').textContent = properties.length;
+  document.getElementById('s-total').textContent = mp.length;
+  document.getElementById('s-high').textContent = mp.filter(p=>scoreProperty(p)>=70).length;
+  if(propertyMode==='commercial'){
+    document.getElementById('s-stat1').textContent = mp.filter(p=>p.flags.vacant_retail).length;
+    document.getElementById('s-stat1-l').textContent = 'Vacant Retail';
+    document.getElementById('s-stat2').textContent = mp.filter(p=>p.flags.dead_restaurant).length;
+    document.getElementById('s-stat2-l').textContent = 'Dead Restaurant';
+    document.getElementById('s-stat3').textContent = mp.filter(p=>p.flags.underutilized_lot||p.flags.redevelopment).length;
+    document.getElementById('s-stat3-l').textContent = 'Underutil / Redev';
+  } else {
+    document.getElementById('s-stat1').textContent = mp.filter(p=>p.flags.tax_delinquent).length;
+    document.getElementById('s-stat1-l').textContent = 'Tax Delinquent';
+    document.getElementById('s-stat2').textContent = mp.filter(p=>p.flags.pre_foreclosure).length;
+    document.getElementById('s-stat2-l').textContent = 'Pre-Foreclosure';
+    document.getElementById('s-stat3').textContent = mp.filter(p=>p.flags.vacant||p.flags.neglected).length;
+    document.getElementById('s-stat3-l').textContent = 'Vacant / Neglected';
+  }
 }
 
+// ── DETAIL PANEL ─────────────────────────────────────────────────────────
 function selectProperty(id){
-  selectedId=id;
-  const p=properties.find(x=>x.id===id);
+  selectedId = id;
+  const p = properties.find(x=>x.id===id);
   if(!p) return;
   renderList();
   showDetail(p);
-  if(map&&markers[id]) map.panTo(markers[id].getPosition());
+  if(map && markers[id]) map.panTo(markers[id].getPosition());
 }
 
 function showDetail(p){
-  const score=scoreProperty(p);
-  const panel=document.getElementById('detail-panel');
-  document.getElementById('dp-addr').textContent=p.address;
-  const flagKeys=Object.keys(p.flags).filter(k=>p.flags[k]);
-  document.getElementById('dp-tags').innerHTML=flagKeys.map(k=>`<span class="tag ${tagClass(k)}">${tagLabel(k)}</span>`).join('');
-  document.getElementById('dp-body').innerHTML=`
-    <div class="detail-row"><span class="detail-label">Motivation Score</span><span class="detail-val" style="color:${score>=70?'#50D080':score>=40?'#D0A030':'#C07030'};font-family:'Syne',sans-serif;font-size:18px">${score}/100</span></div>
+  const score = scoreProperty(p);
+  const scoreColor = score>=70?'#50D080':score>=40?'#D0A030':'#C07030';
+  const panel = document.getElementById('detail-panel');
+  document.getElementById('dp-addr').textContent = p.address;
+  const flagKeys = Object.keys(p.flags||{}).filter(k=>p.flags[k]);
+  document.getElementById('dp-tags').innerHTML = flagKeys.map(k=>`<span class="tag ${tagClass(k)}">${tagLabel(k)}</span>`).join('');
+
+  const photoHtml = p.photo ? `<img class="detail-photo" src="${p.photo}" alt="Property photo"/>` : '';
+  const gpsHtml = (p.lat && p.lng) ? `<div class="detail-row"><span class="detail-label">GPS</span><span class="detail-val" style="font-size:11px">${p.lat}, ${p.lng}</span></div>` : '';
+
+  document.getElementById('dp-body').innerHTML = `
+    ${photoHtml}
+    <div class="detail-row"><span class="detail-label">Motivation Score</span><span class="detail-val" style="color:${scoreColor};font-family:'Syne',sans-serif;font-size:18px">${score}/100</span></div>
+    <div class="detail-row"><span class="detail-label">Type</span><span class="detail-val" style="text-transform:capitalize">${p.type||'residential'}</span></div>
     ${p.value?`<div class="detail-row"><span class="detail-label">Est. Value</span><span class="detail-val">$${Number(p.value).toLocaleString()}</span></div>`:''}
     ${p.owner?`<div class="detail-row"><span class="detail-label">Owner</span><span class="detail-val">${p.owner}</span></div>`:''}
-    <div class="detail-row"><span class="detail-label">Condition</span><span class="detail-val">${['','Good','Minor issues','Moderate','Poor','Severe'][p.condition]}</span></div>
+    <div class="detail-row"><span class="detail-label">Condition</span><span class="detail-val">${['','Good','Minor issues','Moderate','Poor','Severe'][p.condition||3]}</span></div>
     <div class="detail-row"><span class="detail-label">Added</span><span class="detail-val">${new Date(p.addedAt).toLocaleDateString()}</span></div>
+    ${gpsHtml}
     ${p.notes?`<div class="detail-notes">${p.notes}</div>`:''}
   `;
+
+  const enc = encodeURIComponent(p.address);
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${enc}`;
+  const svUrl = (p.lat && p.lng)
+    ? `https://www.google.com/maps?q=&layer=c&cbll=${p.lat},${p.lng}`
+    : `https://maps.google.com/?q=${enc}&layer=c`;
+
+  document.getElementById('dp-maps-row').innerHTML = `
+    <a href="${mapsUrl}" target="_blank" rel="noopener" class="btn btn-sm" style="flex:1;justify-content:center">🗺 Google Maps</a>
+    <a href="${svUrl}" target="_blank" rel="noopener" class="btn btn-sm" style="flex:1;justify-content:center">📸 Street View</a>
+  `;
+
   panel.classList.add('open');
 }
 
-function closeDetail(){document.getElementById('detail-panel').classList.remove('open');selectedId=null;renderList();}
+function closeDetail(){
+  document.getElementById('detail-panel').classList.remove('open');
+  selectedId = null;
+  renderList();
+}
 
 function editSelected(){
   if(!selectedId) return;
-  const p=properties.find(x=>x.id===selectedId);
+  const p = properties.find(x=>x.id===selectedId);
   if(!p) return;
   openAddModal(p);
 }
@@ -367,81 +670,96 @@ function editSelected(){
 function deleteSelected(){
   if(!selectedId) return;
   if(!confirm('Delete this property?')) return;
-  if(map&&markers[selectedId]){markers[selectedId].setMap(null);delete markers[selectedId];}
-  properties=properties.filter(x=>x.id!==selectedId);
+  if(map && markers[selectedId]){markers[selectedId].setMap(null);delete markers[selectedId];}
+  properties = properties.filter(x=>x.id!==selectedId);
   save();
-  selectedId=null;
+  selectedId = null;
   closeDetail();
   renderList();
 }
 
+// ── ADD / EDIT MODAL ────────────────────────────────────────────────────
 function openAddModal(editProp=null){
-  editingId=editProp?editProp.id:null;
-  document.getElementById('modal-title').textContent=editProp?'Edit Property':'Scout a Property';
-  document.getElementById('f-address').value=editProp?editProp.address:'';
-  document.getElementById('f-value').value=editProp&&editProp.value?editProp.value:'';
-  document.getElementById('f-owner').value=editProp?editProp.owner||'':'';
-  document.getElementById('f-notes').value=editProp?editProp.notes||'':'';
-  document.getElementById('f-condition').value=editProp?editProp.condition:3;
-  document.getElementById('cond-val').textContent=editProp?editProp.condition:3;
-  const flags=editProp?editProp.flags:{};
-  ['tax','pre','vacant','neglected','absentee','code'].forEach(k=>{
-    const key={tax:'tax_delinquent',pre:'pre_foreclosure',vacant:'vacant',neglected:'neglected',absentee:'absentee',code:'code_violations'}[k];
-    document.getElementById('f-'+k).checked=!!(flags[key]);
-  });
+  editingId = editProp ? editProp.id : null;
+  document.getElementById('modal-title').textContent = editProp ? 'Edit Property' : 'Scout a Property';
+  document.getElementById('f-address').value = editProp ? editProp.address : '';
+  document.getElementById('f-value').value   = editProp && editProp.value ? editProp.value : '';
+  document.getElementById('f-owner').value   = editProp ? editProp.owner||'' : '';
+  document.getElementById('f-notes').value   = editProp ? editProp.notes||'' : '';
+  document.getElementById('f-condition').value = editProp ? editProp.condition : 3;
+  document.getElementById('cond-val').textContent = editProp ? editProp.condition : 3;
+
+  // If editing a commercial property switch mode checkboxes to its type
+  const propMode = editProp ? (editProp.type||'residential') : propertyMode;
+  renderModalCheckboxes(editProp ? editProp.flags : {});
+
+  // Photo
+  currentPhotoData = editProp ? editProp.photo||null : null;
+  clearPhotoPreview();
+  if(currentPhotoData) showPhotoPreview(currentPhotoData);
+
+  // GPS
+  capturedLat = editProp ? editProp.lat||null : null;
+  capturedLng = editProp ? editProp.lng||null : null;
+  const gpsStatus = document.getElementById('gps-status');
+  const gpsBtn    = document.getElementById('gps-btn');
+  if(capturedLat && capturedLng){
+    gpsBtn.textContent = '✅';
+    gpsBtn.classList.add('captured');
+    gpsStatus.textContent = `📍 ${capturedLat}, ${capturedLng}`;
+    gpsStatus.style.color = '#50D080';
+    gpsStatus.style.display = 'block';
+  } else {
+    gpsBtn.textContent = '📍';
+    gpsBtn.classList.remove('captured');
+    gpsStatus.style.display = 'none';
+  }
+
   updateScorePreview();
   document.getElementById('modal-overlay').classList.add('open');
-  document.getElementById('f-address').focus();
+  setTimeout(()=>document.getElementById('f-address').focus(), 100);
 }
 
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');editingId=null;}
 function handleOverlayClick(e){if(e.target===e.currentTarget)closeModal();}
 
 function updateScorePreview(){
-  const flags={
-    tax_delinquent:document.getElementById('f-tax').checked,
-    pre_foreclosure:document.getElementById('f-pre').checked,
-    vacant:document.getElementById('f-vacant').checked,
-    neglected:document.getElementById('f-neglected').checked,
-    absentee:document.getElementById('f-absentee').checked,
-    code_violations:document.getElementById('f-code').checked
-  };
-  const condition=parseInt(document.getElementById('f-condition').value)||3;
-  const score=scoreProperty({flags,condition});
-  const circle=document.getElementById('preview-circle');
-  const desc=document.getElementById('preview-desc');
-  circle.textContent=score;
-  circle.className='score-circle';
+  const flags = getCurrentFlags();
+  const condition = parseInt(document.getElementById('f-condition').value)||3;
+  const score = scoreProperty({flags, condition, type:propertyMode});
+  const circle = document.getElementById('preview-circle');
+  const desc   = document.getElementById('preview-desc');
+  circle.textContent = score;
+  circle.className = 'score-circle';
   if(score>=70){circle.style.background='#1A3A20';circle.style.color='#50D080';}
   else if(score>=40){circle.style.background='#3A3010';circle.style.color='#D0A030';}
   else{circle.style.background='#2A1A0A';circle.style.color='#C07030';}
-  desc.textContent=score>=70?'High priority — strong distress signals. Follow up ASAP.':score>=40?'Medium priority — worth investigating further.':'Low priority — limited distress signals observed.';
+  desc.textContent = score>=70 ? 'High priority — strong distress signals. Follow up ASAP.'
+                   : score>=40 ? 'Medium priority — worth investigating further.'
+                   : 'Low priority — limited distress signals observed.';
 }
 
 function saveProperty(){
-  const address=document.getElementById('f-address').value.trim();
+  const address = document.getElementById('f-address').value.trim();
   if(!address){alert('Address is required.');return;}
-  const flags={
-    tax_delinquent:document.getElementById('f-tax').checked,
-    pre_foreclosure:document.getElementById('f-pre').checked,
-    vacant:document.getElementById('f-vacant').checked,
-    neglected:document.getElementById('f-neglected').checked,
-    absentee:document.getElementById('f-absentee').checked,
-    code_violations:document.getElementById('f-code').checked
-  };
-  const prop={
-    id:editingId||('p_'+Date.now()),
+  const flags = getCurrentFlags();
+  const prop = {
+    id: editingId || ('p_' + Date.now()),
     address,
-    value:document.getElementById('f-value').value||null,
-    owner:document.getElementById('f-owner').value.trim()||null,
-    notes:document.getElementById('f-notes').value.trim()||null,
-    condition:parseInt(document.getElementById('f-condition').value)||3,
+    type: propertyMode,
+    value: document.getElementById('f-value').value || null,
+    owner: document.getElementById('f-owner').value.trim() || null,
+    notes: document.getElementById('f-notes').value.trim() || null,
+    condition: parseInt(document.getElementById('f-condition').value) || 3,
     flags,
-    addedAt:editingId?(properties.find(x=>x.id===editingId)||{}).addedAt||new Date().toISOString():new Date().toISOString(),
-    updatedAt:new Date().toISOString()
+    photo: currentPhotoData || null,
+    lat: capturedLat || null,
+    lng: capturedLng || null,
+    addedAt: editingId ? (properties.find(x=>x.id===editingId)||{}).addedAt || new Date().toISOString() : new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
   if(editingId){
-    properties=properties.map(x=>x.id===editingId?prop:x);
+    properties = properties.map(x=>x.id===editingId ? prop : x);
   } else {
     properties.unshift(prop);
   }
@@ -451,27 +769,27 @@ function saveProperty(){
   if(map) geocodeAndPin(prop);
 }
 
-// ── GOOGLE MAPS ────────────────────────────────────────────────────────
+// ── GOOGLE MAPS ──────────────────────────────────────────────────────────
 function loadMap(){
-  const key=document.getElementById('api-key-input').value.trim();
+  const key = document.getElementById('api-key-input').value.trim();
   if(!key){alert('Please enter your API key.');return;}
-  localStorage.setItem('gmaps_key',key);
+  localStorage.setItem('gmaps_key', key);
   injectMapsScript(key);
 }
 
 function injectMapsScript(key){
-  const s=document.createElement('script');
-  s.src=`https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
-  s.async=true;
+  const s = document.createElement('script');
+  s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
+  s.async = true;
   document.head.appendChild(s);
 }
 
-window.initMap=function(){
-  document.getElementById('map-placeholder').style.display='none';
-  const mapEl=document.getElementById('map');
-  mapEl.style.display='block';
-  map=new google.maps.Map(mapEl,{
-    center:{lat:37.3382,lng:-121.8863},
+window.initMap = function(){
+  document.getElementById('map-placeholder').style.display = 'none';
+  const mapEl = document.getElementById('map');
+  mapEl.style.display = 'block';
+  map = new google.maps.Map(mapEl, {
+    center:{lat:37.3382, lng:-121.8863},
     zoom:12,
     mapTypeId:'roadmap',
     styles:[
@@ -484,78 +802,99 @@ window.initMap=function(){
       {featureType:'water',elementType:'geometry',stylers:[{color:'#0F1820'}]},
       {featureType:'poi',stylers:[{visibility:'off'}]},
       {featureType:'transit',stylers:[{visibility:'off'}]},
-    ]
+    ],
   });
   properties.forEach(p=>geocodeAndPin(p));
 };
 
 function geocodeAndPin(p){
-  if(!map||!window.google) return;
-  const geo=new google.maps.Geocoder();
-  geo.geocode({address:p.address+', San Jose, CA'},function(res,status){
-    if(status!=='OK'||!res[0]) return;
-    const score=scoreProperty(p);
-    const color=score>=70?'#50D080':score>=40?'#D0A030':'#C07030';
-    const marker=new google.maps.Marker({
-      position:res[0].geometry.location,
-      map,
-      title:p.address,
-      icon:{
-        path:google.maps.SymbolPath.CIRCLE,
-        scale:10,
-        fillColor:color,
-        fillOpacity:0.9,
-        strokeColor:'#0F0F0E',
-        strokeWeight:2
-      }
-    });
-    marker.addListener('click',()=>selectProperty(p.id));
-    markers[p.id]=marker;
+  if(!map || !window.google) return;
+  if(p.lat && p.lng){
+    placeMarker(p, {lat:parseFloat(p.lat), lng:parseFloat(p.lng)});
+    return;
+  }
+  const geo = new google.maps.Geocoder();
+  geo.geocode({address:p.address}, function(res, status){
+    if(status!=='OK' || !res[0]) return;
+    placeMarker(p, res[0].geometry.location);
   });
 }
 
-// ── CSV EXPORT ─────────────────────────────────────────────────────────
+function placeMarker(p, position){
+  const score = scoreProperty(p);
+  const color = score>=70?'#50D080':score>=40?'#D0A030':'#C07030';
+  if(markers[p.id]) markers[p.id].setMap(null);
+  const marker = new google.maps.Marker({
+    position, map,
+    title: p.address,
+    icon:{
+      path: google.maps.SymbolPath.CIRCLE,
+      scale:10,
+      fillColor:color,
+      fillOpacity:0.9,
+      strokeColor:'#0F0F0E',
+      strokeWeight:2,
+    },
+  });
+  marker.addListener('click', ()=>selectProperty(p.id));
+  markers[p.id] = marker;
+}
+
+// ── CSV EXPORT ────────────────────────────────────────────────────────────
 function exportCSV(){
   if(!properties.length){alert('No properties to export yet.');return;}
-  const headers=['Address','Owner','Est Value','Condition','Tax Delinquent','Pre-Foreclosure','Vacant','Neglected','Absentee','Code Violations','Score','Notes','Added'];
-  const rows=properties.map(p=>{
-    const s=scoreProperty(p);
+  const headers = ['Address','Type','Owner','Est Value','Condition',
+    'Tax Delinquent','Pre-Foreclosure','Vacant','Neglected','Absentee',
+    'Code Violations','Long-Term Owner','Vacant Retail','Dead Restaurant',
+    'Underutilized Lot','Redevelopment','Score','Notes','GPS Lat','GPS Lng','Added'];
+  const rows = properties.map(p=>{
+    const s = scoreProperty(p);
     return[
-      p.address,p.owner||'',p.value||'',p.condition,
-      p.flags.tax_delinquent?'Y':'',p.flags.pre_foreclosure?'Y':'',
-      p.flags.vacant?'Y':'',p.flags.neglected?'Y':'',
-      p.flags.absentee?'Y':'',p.flags.code_violations?'Y':'',
-      s,p.notes||'',new Date(p.addedAt).toLocaleDateString()
+      p.address, p.type||'residential', p.owner||'', p.value||'', p.condition,
+      p.flags.tax_delinquent?'Y':'',   p.flags.pre_foreclosure?'Y':'',
+      p.flags.vacant?'Y':'',           p.flags.neglected?'Y':'',
+      p.flags.absentee?'Y':'',         p.flags.code_violations?'Y':'',
+      p.flags.long_term_owner?'Y':'',  p.flags.vacant_retail?'Y':'',
+      p.flags.dead_restaurant?'Y':'',  p.flags.underutilized_lot?'Y':'',
+      p.flags.redevelopment?'Y':'',
+      s, p.notes||'', p.lat||'', p.lng||'',
+      new Date(p.addedAt).toLocaleDateString(),
     ].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',');
   });
-  const csv=[headers.join(','),...rows].join('\n');
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='parceliq_leads_'+new Date().toISOString().slice(0,10)+'.csv';
+  const csv = [headers.join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'parceliq_leads_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
 }
 
-function setFilter(f,el){
-  activeFilter=f;
+function setFilter(f, el){
+  activeFilter = f;
   document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   filterLeads();
 }
 
 function filterLeads(){
-  searchQuery=document.getElementById('search-input').value;
+  searchQuery = document.getElementById('search-input').value;
   renderList();
 }
 
-// Auto-load map if key saved
-const savedKey=localStorage.getItem('gmaps_key');
-if(savedKey){
-  setTimeout(()=>{
-    document.getElementById('api-key-input').value=savedKey;
-    injectMapsScript(savedKey);
-  },100);
+// ── INIT ──────────────────────────────────────────────────────────────────
+if(propertyMode === 'commercial'){
+  document.getElementById('mode-res').classList.remove('active');
+  document.getElementById('mode-com').classList.add('active');
 }
 
+const savedKey = localStorage.getItem('gmaps_key');
+if(savedKey){
+  setTimeout(()=>{
+    document.getElementById('api-key-input').value = savedKey;
+    injectMapsScript(savedKey);
+  }, 100);
+}
+
+renderFilters();
 renderList();
 </script>
 </body>
