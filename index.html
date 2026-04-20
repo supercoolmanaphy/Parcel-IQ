@@ -296,7 +296,7 @@ textarea.field-input{resize:vertical;min-height:80px}
       </div>
 
       <div class="field-group">
-        <div class="field-label">Listing Type</div>
+        <label class="field-label" for="f-type">Listing Type</label>
         <select class="field-input" id="f-type" onchange="setModalType(this.value)">
           <option value="residential">Residential</option>
           <option value="commercial">Commercial</option>
@@ -464,8 +464,9 @@ function renderFilters(){
 }
 
 function setModalType(mode){
+  const existingFlags = getCurrentFlags();
   modalPropertyType = mode === 'commercial' ? 'commercial' : 'residential';
-  renderModalCheckboxes({});
+  renderModalCheckboxes(existingFlags);
   updateScorePreview();
 }
 
