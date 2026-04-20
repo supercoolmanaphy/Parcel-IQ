@@ -382,7 +382,13 @@ const COMMERCIAL_FLAGS = [
   {id:'f-code',key:'code_violations',label:'Code Violations'},
 ];
 
-function save(){localStorage.setItem('parceliq_props',JSON.stringify(properties));}
+function save(){
+  try{
+    localStorage.setItem('parceliq_props', JSON.stringify(properties));
+  } catch(e){
+    alert('Storage is full. Your last change could not be saved. Try removing photos from older listings to free up space.');
+  }
+}
 
 // ── SCORING ─────────────────────────────────────────────────────────────
 function scoreProperty(p){
@@ -469,6 +475,12 @@ function getCurrentFlags(){
 function handlePhotoUpload(input){
   const file = input.files[0];
   if(!file) return;
+  const MAX_MB = 20;
+  if(file.size > MAX_MB * 1024 * 1024){
+    alert(`Photo is too large (${(file.size/1024/1024).toFixed(1)} MB). Please choose a photo under ${MAX_MB} MB.`);
+    input.value = '';
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(e){
     const img = new Image();
@@ -524,8 +536,8 @@ function captureGPS(){
   status.style.display = 'block';
   navigator.geolocation.getCurrentPosition(
     function(pos){
-      capturedLat = pos.coords.latitude.toFixed(6);
-      capturedLng = pos.coords.longitude.toFixed(6);
+      capturedLat = parseFloat(pos.coords.latitude.toFixed(6));
+      capturedLng = parseFloat(pos.coords.longitude.toFixed(6));
       btn.textContent = '✅';
       btn.classList.add('captured');
       status.textContent = `📍 ${capturedLat}, ${capturedLng}`;
@@ -669,7 +681,9 @@ function editSelected(){
 
 function deleteSelected(){
   if(!selectedId) return;
-  if(!confirm('Delete this property?')) return;
+  const p = properties.find(x=>x.id===selectedId);
+  if(!p) return;
+  if(!confirm(`Delete "${p.address}"?\nThis cannot be undone.`)) return;
   if(map && markers[selectedId]){markers[selectedId].setMap(null);delete markers[selectedId];}
   properties = properties.filter(x=>x.id!==selectedId);
   save();
@@ -810,7 +824,7 @@ window.initMap = function(){
 function geocodeAndPin(p){
   if(!map || !window.google) return;
   if(p.lat && p.lng){
-    placeMarker(p, {lat:parseFloat(p.lat), lng:parseFloat(p.lng)});
+    placeMarker(p, {lat:p.lat, lng:p.lng});
     return;
   }
   const geo = new google.maps.Geocoder();
